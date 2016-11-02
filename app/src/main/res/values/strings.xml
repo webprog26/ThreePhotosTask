@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">ThreePhotosUploading</string>
+    <string name="start_downloading">Start download</string>
+    <string name="download_started">Download started</string>
+    <string name="download_in_progress">Download in progress</string>
+    <string name="download_finished">Download finished</string>
+    <string name="first_photo_url">http://weknowyourdreams.com/images/blonde/blonde-06.jpg</string>
+    <string name="second_photo_url">http://www.schwarzkopf.com/content/dam/skus/home/haircolor/blonde_hair/farbpflege_blond/blondpflege_320.jpg</string>
+    <string name="third_photo_url">http://yourhaircolors.com/wp-content/uploads/2015/06/blue-eyes-and-blonde-hair-color1.jpg</string>
+</resources>

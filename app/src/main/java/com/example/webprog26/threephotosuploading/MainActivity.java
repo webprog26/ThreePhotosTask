@@ -13,10 +13,9 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity_TAG";
 
-    private ProgressBar mProgressBar;
-    private Button mBtnStartDownload;
     private PhotosDownloadThread mPhotosDownloadThread;
     private ImageView mImageView;
+    private PhotosUiHandler uiHandler;
 
 
 
@@ -31,11 +30,11 @@ public class MainActivity extends AppCompatActivity {
                 getResources().getString(R.string.third_photo_url),
         };
 
-        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
-        mBtnStartDownload = (Button) findViewById(R.id.btnStartDownload);
+        ProgressBar mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+        Button mBtnStartDownload = (Button) findViewById(R.id.btnStartDownload);
         mImageView = (ImageView) findViewById(R.id.imageView);
 
-        PhotosUiHandler uiHandler = new PhotosUiHandler(mProgressBar, mBtnStartDownload, this);
+        uiHandler = new PhotosUiHandler(mProgressBar, mBtnStartDownload, this);
 
         mPhotosDownloadThread = new PhotosDownloadThread(uiHandler, mImageView);
         mPhotosDownloadThread.setListener(new PhotosDownloadThread.OnHighestResolutionBitmapFoundListener() {
@@ -46,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
         });
         mPhotosDownloadThread.start();
         mPhotosDownloadThread.getLooper();
-
 
         mBtnStartDownload.setOnClickListener(new View.OnClickListener() {
             @Override

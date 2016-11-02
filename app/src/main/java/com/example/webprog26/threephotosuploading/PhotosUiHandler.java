@@ -18,7 +18,7 @@ import static com.example.webprog26.threephotosuploading.PhotosDownloadThread.PH
  * Created by webprog26 on 02.11.2016.
  */
 
-public class PhotosUiHandler extends Handler {
+class PhotosUiHandler extends Handler {
 
     private static final String TAG = "PhotosUiHandler";
 
@@ -28,7 +28,7 @@ public class PhotosUiHandler extends Handler {
 
     private boolean isTaskExecuting = false;
 
-    public PhotosUiHandler(ProgressBar mProgressBar, Button btnStartDownload, Context context) {
+    PhotosUiHandler(ProgressBar mProgressBar, Button btnStartDownload, Context context) {
         this.mProgressBar = mProgressBar;
         this.mBtnStartDownload = btnStartDownload;
         this.mContext = context;
@@ -74,7 +74,7 @@ public class PhotosUiHandler extends Handler {
 
     /**
      * Changes the visibility of ProgressBar to let user know that download process is in progress
-     * @param progressBar
+     * @param progressBar ProgressBar
      */
     private void changeProgressBarVisibility(ProgressBar progressBar){
         if(progressBar.getVisibility() == View.GONE){
@@ -86,7 +86,7 @@ public class PhotosUiHandler extends Handler {
 
     /**
      * Makes toast with received message
-     * @param message
+     * @param message String
      */
     private void makeToast(String message){
         Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();

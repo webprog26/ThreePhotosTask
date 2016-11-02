@@ -21,9 +21,9 @@ public class PhotosDownloadThread extends HandlerThread {
 
     private static final String PHOTOS_URLS = "photos_urls";
 
-    public static final int PHOTOS_DOWNLOAD_STARTED = 100;
-    public static final int PHOTOS_DOWNLOAD_IN_PROGRESS = 101;
-    public static final int PHOTOS_DOWNLOAD_FINISHED = 102;
+    static final int PHOTOS_DOWNLOAD_STARTED = 100;
+    static final int PHOTOS_DOWNLOAD_IN_PROGRESS = 101;
+    static final int PHOTOS_DOWNLOAD_FINISHED = 102;
 
 
     private Handler mWorkerHandler;
@@ -32,16 +32,16 @@ public class PhotosDownloadThread extends HandlerThread {
     private ArrayList<Bitmap> mPhotos;
     private OnHighestResolutionBitmapFoundListener mListener;
 
-    public interface OnHighestResolutionBitmapFoundListener{
+    interface OnHighestResolutionBitmapFoundListener{
         void setBitmap(ImageView imageView, Bitmap bitmap);
     }
 
-    public void setListener(OnHighestResolutionBitmapFoundListener listener)
+    void setListener(OnHighestResolutionBitmapFoundListener listener)
     {
         this.mListener = listener;
     }
 
-    public PhotosDownloadThread(Handler uiHandler, ImageView imageView){
+    PhotosDownloadThread(Handler uiHandler, ImageView imageView){
         super(TAG);
         this.mUiHandler = uiHandler;
         this.mImageView = imageView;
@@ -67,10 +67,10 @@ public class PhotosDownloadThread extends HandlerThread {
                         mUiHandler.obtainMessage(PHOTOS_DOWNLOAD_STARTED).sendToTarget();//download started
 
                         //In this cycle images are downloading and mUiHandler receives he messages about download progress
-                        for(int i = 0; i < photosUrls.length; i++)
-                        {
+                        assert photosUrls != null;
+                        for (String photosUrl : photosUrls) {
                             mUiHandler.sendMessage(mUiHandler.obtainMessage(PHOTOS_DOWNLOAD_IN_PROGRESS));
-                            if((bitmap = BitmapUtils.getBitmapFromURL(photosUrls[i])) != null){
+                            if ((bitmap = BitmapUtils.getBitmapFromURL(photosUrl)) != null) {
                                 mPhotos.add(bitmap);
                                 Log.i(TAG, bitmap.toString());
                             }
@@ -92,12 +92,13 @@ public class PhotosDownloadThread extends HandlerThread {
 
     /**
      * Sends the message to mWorkerHandler, so download starts
-     * @param photosUrls
+     * @param photosUrls String[]
      */
-    public void setPhotosDownloadStarted(String[] photosUrls){
+    void setPhotosDownloadStarted(String[] photosUrls){
         Bundle bundle = new Bundle();
         bundle.putStringArray(PHOTOS_URLS, photosUrls);
-        mWorkerHandler.obtainMessage(PHOTOS_DOWNLOAD_STARTED, bundle).sendToTarget();
+            mWorkerHandler.obtainMessage(PHOTOS_DOWNLOAD_STARTED, bundle).sendToTarget();
+
     }
 
 

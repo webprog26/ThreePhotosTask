@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         Button mBtnStartDownload = (Button) findViewById(R.id.btnStartDownload);
         mImageView = (ImageView) findViewById(R.id.imageView);
 
-        uiHandler = new PhotosUiHandler(mProgressBar, mBtnStartDownload, this);
+        uiHandler = new PhotosUiHandler(mProgressBar, mBtnStartDownload, this, mImageView);
 
         mPhotosDownloadThread = new PhotosDownloadThread(uiHandler, mImageView);
         mPhotosDownloadThread.setListener(new PhotosDownloadThread.OnHighestResolutionBitmapFoundListener() {

@@ -18,7 +18,7 @@ public class BitmapUtils {
     /**
      * Gets bitmap from the Internet
      * @param src
-     * @return Bitmap
+     * @return {@link Bitmap)
      */
     public static Bitmap getBitmapFromURL(String src) {
         try {
@@ -37,8 +37,8 @@ public class BitmapUtils {
 
     /**
      * Gets the highest resolution Bitmap from ArrayList<Bitmap>
-     * @param bitmaps ArrayList<Bitmap>
-     * @return Bitmap
+     * @param bitmaps {@link ArrayList<Bitmap>)
+     * @return {@link Bitmap)
      */
     public static Bitmap getHighestResolutionBitmap(ArrayList<Bitmap> bitmaps)
     {

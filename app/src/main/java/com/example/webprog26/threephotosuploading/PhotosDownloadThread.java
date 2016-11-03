@@ -33,6 +33,11 @@ public class PhotosDownloadThread extends HandlerThread {
     private OnHighestResolutionBitmapFoundListener mListener;
 
     interface OnHighestResolutionBitmapFoundListener{
+        /**
+         *
+         * @param imageView {@link ImageView}
+         * @param bitmap {@link Bitmap}
+         */
         void setBitmap(ImageView imageView, Bitmap bitmap);
     }
 
@@ -84,6 +89,8 @@ public class PhotosDownloadThread extends HandlerThread {
                                mListener.setBitmap(mImageView, highestResolutionBitmap);//set bitmap to ImageView in MainActivity
                            }
                        });
+                        //Clearing MessageQueue to avoid memory leaks
+                       mWorkerHandler.removeMessages(PHOTOS_DOWNLOAD_STARTED);
                        break;
                 }
             }
@@ -92,7 +99,7 @@ public class PhotosDownloadThread extends HandlerThread {
 
     /**
      * Sends the message to mWorkerHandler, so download starts
-     * @param photosUrls String[]
+     * @param photosUrls {@link String[])
      */
     void setPhotosDownloadStarted(String[] photosUrls){
         Bundle bundle = new Bundle();
@@ -100,6 +107,4 @@ public class PhotosDownloadThread extends HandlerThread {
             mWorkerHandler.obtainMessage(PHOTOS_DOWNLOAD_STARTED, bundle).sendToTarget();
 
     }
-
-
 }

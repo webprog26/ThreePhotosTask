@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
+import android.os.Process;
 import android.util.Log;
 import android.widget.ImageView;
 
@@ -47,7 +48,7 @@ public class PhotosDownloadThread extends HandlerThread {
     }
 
     PhotosDownloadThread(Handler uiHandler, ImageView imageView){
-        super(TAG);
+        super(TAG, Process.THREAD_PRIORITY_BACKGROUND);
         this.mUiHandler = uiHandler;
         this.mImageView = imageView;
         mPhotos = new ArrayList<>();
@@ -74,7 +75,11 @@ public class PhotosDownloadThread extends HandlerThread {
                         //In this cycle images are downloading and mUiHandler receives he messages about download progress
                         assert photosUrls != null;
                         for (String photosUrl : photosUrls) {
-                            mUiHandler.sendMessage(mUiHandler.obtainMessage(PHOTOS_DOWNLOAD_IN_PROGRESS));
+
+                            if(!mUiHandler.hasMessages(PHOTOS_DOWNLOAD_FINISHED)) {
+                                mUiHandler.sendMessage(mUiHandler.obtainMessage(PHOTOS_DOWNLOAD_IN_PROGRESS));
+                            }
+
                             if ((bitmap = BitmapUtils.getBitmapFromURL(photosUrl)) != null) {
                                 mPhotos.add(bitmap);
                                 Log.i(TAG, bitmap.toString());

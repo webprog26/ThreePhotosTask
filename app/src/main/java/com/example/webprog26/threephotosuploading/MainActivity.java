@@ -1,8 +1,11 @@
 package com.example.webprog26.threephotosuploading;
 
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -43,8 +46,15 @@ public class MainActivity extends AppCompatActivity {
                 imageView.setImageBitmap(bitmap);
             }
         });
+        mPhotosDownloadThread.setUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+            @Override
+            public void uncaughtException(Thread thread, Throwable throwable) {
+                Log.i(TAG, throwable.toString());
+            }
+        });
         mPhotosDownloadThread.start();
         mPhotosDownloadThread.getLooper();
+
 
         mBtnStartDownload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,6 +62,14 @@ public class MainActivity extends AppCompatActivity {
                 mPhotosDownloadThread.setPhotosDownloadStarted(photosUrls);
             }
         });
+    }
+
+    @Override
+    public Object onRetainCustomNonConfigurationInstance() {
+        if(mPhotosDownloadThread != null && mPhotosDownloadThread.isAlive()){
+            return mPhotosDownloadThread;
+        }
+        return null;
     }
 
     @Override

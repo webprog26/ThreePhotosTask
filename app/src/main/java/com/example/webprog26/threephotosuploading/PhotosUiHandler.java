@@ -50,6 +50,7 @@ class PhotosUiHandler extends Handler {
                         changeProgressBarVisibility(mProgressBar);
                         changeImageViewVisibility(mImageView);
                         mBtnStartDownload.setEnabled(isTaskExecuting);
+                        removeMessages(PHOTOS_DOWNLOAD_STARTED);
                     }
                 });
                 break;
@@ -67,16 +68,14 @@ class PhotosUiHandler extends Handler {
                 post(new Runnable() {
                     @Override
                     public void run() {
+                        removeMessages(PHOTOS_DOWNLOAD_IN_PROGRESS);
                         makeToast(mContext.getResources().getString(R.string.download_finished));
                         changeProgressBarVisibility(mProgressBar);
                         changeImageViewVisibility(mImageView);
                         mBtnStartDownload.setEnabled(!isTaskExecuting);
+                        removeMessages(PHOTOS_DOWNLOAD_FINISHED);
                     }
                 });
-                //Clearing MessageQueue to avoid memory leaks
-                removeMessages(PHOTOS_DOWNLOAD_STARTED);
-                removeMessages(PHOTOS_DOWNLOAD_IN_PROGRESS);
-                removeMessages(PHOTOS_DOWNLOAD_FINISHED);
                 break;
         }
     }

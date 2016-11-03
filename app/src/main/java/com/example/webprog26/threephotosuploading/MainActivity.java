@@ -1,8 +1,6 @@
 package com.example.webprog26.threephotosuploading;
 
-import android.content.res.Configuration;
 import android.graphics.Bitmap;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -59,14 +57,6 @@ public class MainActivity extends AppCompatActivity {
                 mPhotosDownloadThread.setPhotosDownloadStarted(photosUrls);
             }
         });
-    }
-
-    @Override
-    public Object onRetainCustomNonConfigurationInstance() {
-        if(mPhotosDownloadThread != null && mPhotosDownloadThread.isAlive()){
-            return mPhotosDownloadThread;
-        }
-        return null;
     }
 
     @Override

@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * Created by webprog26 on 02.11.2016.
  */
 
-public class PhotosDownloadThread extends HandlerThread {
+class PhotosDownloadThread extends HandlerThread {
 
     private static final String TAG = "PhotosDownloadThread";
 
@@ -35,7 +35,7 @@ public class PhotosDownloadThread extends HandlerThread {
 
     interface OnHighestResolutionBitmapFoundListener{
         /**
-         *
+         * Sets {@link Bitmap} as {@link ImageView} image
          * @param imageView {@link ImageView}
          * @param bitmap {@link Bitmap}
          */

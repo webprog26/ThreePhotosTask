@@ -17,9 +17,6 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity_TAG";
 
     private PhotosDownloadThread mPhotosDownloadThread;
-    private ImageView mImageView;
-    private PhotosUiHandler uiHandler;
-
 
 
     @Override
@@ -35,9 +32,9 @@ public class MainActivity extends AppCompatActivity {
 
         ProgressBar mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
         Button mBtnStartDownload = (Button) findViewById(R.id.btnStartDownload);
-        mImageView = (ImageView) findViewById(R.id.imageView);
+        ImageView mImageView = (ImageView) findViewById(R.id.imageView);
 
-        uiHandler = new PhotosUiHandler(mProgressBar, mBtnStartDownload, this, mImageView);
+        PhotosUiHandler uiHandler = new PhotosUiHandler(mProgressBar, mBtnStartDownload, this, mImageView);
 
         mPhotosDownloadThread = new PhotosDownloadThread(uiHandler, mImageView);
         mPhotosDownloadThread.setListener(new PhotosDownloadThread.OnHighestResolutionBitmapFoundListener() {

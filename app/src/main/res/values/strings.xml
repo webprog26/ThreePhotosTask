@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ThreePhotosUploading</string>
+    <string name="app_name">ThreePhotosDownloading</string>
     <string name="start_downloading">Start download</string>
     <string name="download_started">Download started</string>
     <string name="download_in_progress">Download in progress</string>

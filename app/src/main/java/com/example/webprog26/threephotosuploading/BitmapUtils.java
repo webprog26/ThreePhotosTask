@@ -13,22 +13,21 @@ import java.util.ArrayList;
  * Created by webprog26 on 02.11.2016.
  */
 
-public class BitmapUtils {
+class BitmapUtils {
 
     /**
      * Gets bitmap from the Internet
-     * @param src
+     * @param src {@link String}
      * @return {@link Bitmap)
      */
-    public static Bitmap getBitmapFromURL(String src) {
+    static Bitmap getBitmapFromURL(String src) {
         try {
             URL url = new URL(src);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setDoInput(true);
             connection.connect();
             InputStream input = connection.getInputStream();
-            Bitmap myBitmap = BitmapFactory.decodeStream(input);
-            return myBitmap;
+            return BitmapFactory.decodeStream(input);
         } catch (IOException ioe) {
             ioe.printStackTrace();
             return null;
@@ -40,7 +39,7 @@ public class BitmapUtils {
      * @param bitmaps {@link ArrayList<Bitmap>)
      * @return {@link Bitmap)
      */
-    public static Bitmap getHighestResolutionBitmap(ArrayList<Bitmap> bitmaps)
+    static Bitmap getHighestResolutionBitmap(ArrayList<Bitmap> bitmaps)
     {
         Bitmap bitmap = bitmaps.get(0);
 

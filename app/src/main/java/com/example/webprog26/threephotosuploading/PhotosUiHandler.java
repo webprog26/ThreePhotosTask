@@ -47,8 +47,8 @@ class PhotosUiHandler extends Handler {
                     @Override
                     public void run() {
                         makeToast(mContext.getResources().getString(R.string.download_started));
-                        changeProgressBarVisibility(mProgressBar);
-                        changeImageViewVisibility(mImageView);
+                        changeViewVisibility(mProgressBar);
+                        changeViewVisibility(mImageView);
                         mBtnStartDownload.setEnabled(isTaskExecuting);
                         removeMessages(PHOTOS_DOWNLOAD_STARTED);
                     }
@@ -70,8 +70,8 @@ class PhotosUiHandler extends Handler {
                     public void run() {
                         removeMessages(PHOTOS_DOWNLOAD_IN_PROGRESS);
                         makeToast(mContext.getResources().getString(R.string.download_finished));
-                        changeProgressBarVisibility(mProgressBar);
-                        changeImageViewVisibility(mImageView);
+                        changeViewVisibility(mProgressBar);
+                        changeViewVisibility(mImageView);
                         mBtnStartDownload.setEnabled(!isTaskExecuting);
                         removeMessages(PHOTOS_DOWNLOAD_FINISHED);
                     }
@@ -81,14 +81,14 @@ class PhotosUiHandler extends Handler {
     }
 
     /**
-     * Changes the visibility of ProgressBar to let user know that download process is in progress
-     * @param progressBar {@link ProgressBar)
+     * Changes the visibility of {@link View} to let user know that download process is in progress
+     * @param view {@link View}
      */
-    private void changeProgressBarVisibility(ProgressBar progressBar){
-        if(progressBar.getVisibility() == View.GONE){
-            progressBar.setVisibility(View.VISIBLE);
+    private void changeViewVisibility(View view){
+        if(view.getVisibility() == View.GONE){
+            view.setVisibility(View.VISIBLE);
         } else {
-            progressBar.setVisibility(View.GONE);
+            view.setVisibility(View.GONE);
         }
     }
 
@@ -98,17 +98,5 @@ class PhotosUiHandler extends Handler {
      */
     private void makeToast(String message){
         Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
-    }
-
-    /**
-     * Changes the visibility of showing ImageView if user starts  repeating download process
-     * @param imageView {@link ImageView}
-     */
-    private void changeImageViewVisibility(ImageView imageView){
-        if(imageView.getVisibility() == View.GONE){
-            imageView.setVisibility(View.VISIBLE);
-        } else {
-            imageView.setVisibility(View.GONE);
-        }
     }
 }
